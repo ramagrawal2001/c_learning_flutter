@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../screens/c_index_screen.dart';
+import '../screens/programme_index_screen.dart';
+import '../screens/about_us_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   Widget buildListTile(String title, IconData icon, Function tapHandler) {
@@ -29,13 +31,13 @@ class MainDrawer extends StatelessWidget {
             width: double.infinity,
             padding: EdgeInsets.all(20),
             alignment: Alignment.centerLeft,
-            color: Theme.of(context).colorScheme.secondary,
+            color: Color(0xff645CAA),
             child: Text(
               'Learning Up!',
               style: TextStyle(
                 fontWeight: FontWeight.w900,
                 fontSize: 30,
-                color: Colors.pink,
+                color: Colors.white,
               ),
             ),
           ),
@@ -55,7 +57,7 @@ class MainDrawer extends StatelessWidget {
             Icons.book_outlined,
             () {
               Navigator.of(context)
-                  .pushReplacementNamed(CIndexScreen.routeName);
+                  .pushReplacementNamed(ProgramIndexScreen.routeName);
             },
           ),
           buildListTile(
@@ -63,7 +65,7 @@ class MainDrawer extends StatelessWidget {
             Icons.settings,
             () {
               Navigator.of(context)
-                  .pushReplacementNamed(CIndexScreen.routeName);
+                  .pushReplacementNamed(AboutUsScreen.routeName);
             },
           ),
         ],

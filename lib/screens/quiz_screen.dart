@@ -11,37 +11,26 @@ class QuizScreen extends StatefulWidget {
 
 class _QuizScreenState extends State<QuizScreen> {
   var _questionIndex = 0;
-  // var _totalScore = 0;
+  var _totalScore = 0;
   var _questions;
   List<bool> clicked = [false, false, false, false];
+  String buttonText = "Validate";
   String message = "";
-  var wrongAttempt = 0;
+  bool isCorrect = false;
+  bool isValidateClicked = false;
 
   void _resetQuiz() {
     setState(() {
       _questionIndex = 0;
-      // _totalScore = 0;
-      wrongAttempt = 0;
+      _totalScore = 0;
     });
   }
 
   void _answerQuestion(int index) {
-    // _totalScore += score ? 1 : 0;
-
     setState(() {
       for (int i = 0; i < 4; i++) if (index != i) clicked[i] = false;
       clicked[index] = true;
     });
-
-    // setState(() {
-    //   _questionIndex = _questionIndex + 1;
-    // });
-    // print(_questionIndex);
-    // if (_questionIndex < _questions.length) {
-    //   print('We have more questions!');
-    // } else {
-    //   print('No more questions!');
-    // }
   }
 
   void _answerCheck() {
@@ -49,16 +38,24 @@ class _QuizScreenState extends State<QuizScreen> {
     for (int i = 0; i < 4; i++) if (clicked[i]) x = i;
     setState(() {
       if (x == -1)
-        message = "Please Chose an option";
+        message = "Please Chose an option to continue...";
       else {
-        if (_questions[_questionIndex]['answers'][x]['score']) {
+        if (isValidateClicked) {
+          buttonText = "Validate";
+          isValidateClicked = false;
+          isCorrect = false;
           _questionIndex++;
-          message = "";
-          // _totalScore++;
           for (int i = 0; i < 4; i++) clicked[i] = false;
         } else {
-          wrongAttempt++;
-          message = "Please Chose correct option";
+          isValidateClicked = true;
+          message = "";
+          buttonText = "Next";
+          if (_questions[_questionIndex]['answers'][x]['score']) {
+            isCorrect = true;
+            _totalScore++;
+          } else {
+            isCorrect = false;
+          }
         }
       }
     });
@@ -111,7 +108,9 @@ class _QuizScreenState extends State<QuizScreen> {
                         QuizOption(
                             _questions[_questionIndex]['answers'][i]['text'],
                             () => _answerQuestion(i),
-                            clicked[i]),
+                            clicked[i],
+                            isValidateClicked,
+                            isCorrect),
                     ],
                   ),
                 ),
@@ -125,7 +124,7 @@ class _QuizScreenState extends State<QuizScreen> {
                       onPressed: (() => _answerCheck()),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text("Validate"),
+                        child: Text(buttonText),
                       )),
                 ),
               ],
@@ -139,7 +138,7 @@ class _QuizScreenState extends State<QuizScreen> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    "Your total wrong attempts are: " + wrongAttempt.toString(),
+                    "Your score is: "+ _totalScore.toString()+" out of "+_questions.length.toString(),
                     style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
