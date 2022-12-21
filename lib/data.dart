@@ -76,29 +76,29 @@ Widget getList(List<String> l) {
   );
 }
 
-Widget getNotebook(String text) =>ResponsiveNotebookBackground(
-  options:const ResponsiveNotebookBackgroundOptions(
-    blankLines: 2,
-    horizontalPadding: 20,
-    lineWidth: 2.5,
-    backgroundColor: Colors.black12,
-    lineColor: Colors.blueAccent,
-    lineType: LineType.line,
-    styleForHeightCalculation: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-      color: Colors.brown,
-    ),
-  ),
-  child:Text(
-    text,
-    style:const TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-      color: Colors.brown,
-    ),
-  ),
-);
+Widget getNotebook(String text) => ResponsiveNotebookBackground(
+      options: const ResponsiveNotebookBackgroundOptions(
+        blankLines: 2,
+        horizontalPadding: 20,
+        lineWidth: 2.5,
+        backgroundColor: Colors.black12,
+        lineColor: Colors.blueAccent,
+        lineType: LineType.line,
+        styleForHeightCalculation: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.brown,
+        ),
+      ),
+      child: Text(
+        text,
+        style: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.brown,
+        ),
+      ),
+    );
 
 final THEORY_DATA = [
   Theory(
@@ -852,7 +852,7 @@ final THEORY_DATA = [
           "Assignment Opertor",
         ),
         getContent(
-          "1)It is denoted by symbol '='.\n 2)It is used to assign value to variable\n 3)It is binary operator.\n 4)It has right to left associativity.\n 5)It has the lowest priority.",
+          "1)It is denoted by symbol '='.\n 2)It is used to assign value to variable.\n 3)It is binary operator.\n 4)It has right to left associativity.\n 5)It has the lowest priority.",
         ),
         getSubHeading(
           "Syntax:-",
@@ -861,13 +861,142 @@ final THEORY_DATA = [
           "variable=expression;\n OR\n variable=value;\n\n e.g\n int x;\n x=5;",
         ),
       ],
-    )
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Increment/Decrement Operators",
+        ),
+        getSubHeading(
+          "Increment Opertor",
+        ),
+        getContent(
+          "1)It is denoted by symbol '++'.\n 2)It increments the value of variable by (1).\n 3)It is unary operator.",
+        ),
+        getSubHeading(
+          "Decrement Operator",
+        ),
+        getContent(
+          "1)It is denoted by symbol '--'.\n 2)It decrements the value of variable by (1).\n 3)It is unary operator.",
+        ),
+        getSubHeading(
+          "Note:-",
+        ),
+        getContent(
+          "1)These operators can't be operated on constant values.\n 2)Both operators can be used in prefix(++x) and postfix(x++) forms.\n 3)Prefix forms have high priority. That means it is incremented or decremented and used in hybrid expressions.\n 4)Postfix forms have low priority. That means current value is used in expression and then incremented or decremented.",
+        ),
+        getContent(
+          "for.e.g.\n int x=5, y=7, z;\n z=x+y--;\n Value of z becomes 12.",
+        ),
+        getContent(
+          "for.e.g.\n int x=5, y=7, z;\n z=y - ++x;\n Value of z becomes 1.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Conditional Operator",
+        ),
+        getContent(
+          "1)It is denoted by symbol '?'.\n 2)It is only turnary operator in 'c'.",
+        ),
+        getSubHeading(
+          "Syntax:-",
+        ),
+        getContent(
+          "(condition)?exp1:exp2;",
+        ),
+        getContent(
+          "1)If condition is true, exp1 is evaluated.\n 2)If condition is false, exp2 is evaluated.\n 3)Conditional operator can be used to replace simple 'if-else' statement in symbolic form.\n\n e.g. x=(y>0)?1:0;",
+        ),
+      ],
+    ),
   ]),
   Theory(id: 'i6', title: 'Decision Control Structure', subIndex: [
     "'if' Control Structure",
     "'if-else' Control Structure",
     "'switch-case' Control Structure",
-    "Conditional Operator"
+    "Conditional Operator",
+  ], theoryContent: [
+    Column(
+      children: [
+        getHeading(
+          "'if' Control Structure",
+        ),
+        getSubHeading(
+          "Syntax:-",
+        ),
+        getNotebook(
+          "if(condition)\n{\n   ------\n   ------\n}",
+        ),
+        getContent(
+          "1)When control reaches 'if' statement, condition is evaluated.\n 2)If condition is true ,set of istructions inside 'if' block is executed.\n 3)If condition is false ,set of istructions inside 'if' block is not executed. ",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "'if-else' Control Structure",
+        ),
+        getSubHeading(
+          "Syntax:-",
+        ),
+        getNotebook(
+          "if(condition)\n{\n   --------\n   //Action A\n   --------\n}\n else\n{\n   --------\n   //Action B\n   --------\n}",
+        ),
+        getContent(
+          "1) When control reaches 'if' statement, condition is evaluated.\n 2) If condition is true, set of instructions inside 'if' block is executed (Action A is executed).\n 3) If condition is false, set of instructions inside 'else' block is executed (Action B is executed).",
+        ),
+        Divider(
+          color: Color.fromARGB(255, 86, 41, 145),
+        ),
+        getHeading(
+          "Nesting of'if-else'",
+        ),
+        getSubHeading(
+          "Syntax:-",
+        ),
+        getNotebook(
+          "if(condition_A){\n     if(condition_B){\n         --------\n         //Action A\n         --------\n     }\n     else{\n       --------\n       //Action B\n       --------\n       }\n}\nelse{\n     --------\n      //Action C\n      --------\n}",
+        ),
+        getContent(
+          "1) When control reaches 'if' statement, condition is evaluated.\n2) If condition_A is true, set of instructions inside 'if' block is executed and then condition_B is evaluated.\n3) If condition_B is true Action A is executed. If condition_B is false Action B is executed.\n4) If condition_A is false 'else' block is executed i.e.Action C is executed.",
+        ),
+        Divider(
+          color: Color.fromARGB(255, 86, 41, 145),
+        ),
+        getHeading(
+          "'if-else' Ladder",
+        ),
+        getSubHeading(
+          "Syntax:-",
+        ),
+        getNotebook(
+          "if(condition_A){\n      --------\n      //Action A\n      --------\n}\nelse if(condition_B){\n      --------\n      //Action B\n      --------\n}\nelse if(condition_C){\n      --------\n      //Action C\n      --------\n}\nelse{\n      --------\n      //Action D\n      --------\n}",
+        ),
+        getContent(
+          "1) When control reaches 'if' statement, condition is evaluated.\n2) If condition_A is true Action A is executed andcontrol jumps out of ladder.\n3) If condition_A is false then condition_B is tested. If it is true Action B is executed and control jumps out of ladder.\n4) In this way conditions are tested if and only if all previous conditions are false. If all conditions are false 'else' block is executed i.e. Action D is executed.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "'Switch-Case' Control Structure",
+        ),
+        getSubHeading(
+          "Syntax:-",
+        ),
+        getNotebook(
+          "switch(variable){\n     case <value_1> : Action_1;break;\n     case <value_2> : Action_2;break;\n     case <value_3> : Action_3;break;\n     .\n     .\n     .\n     default:default_action;\n}",
+        ),
+        getContent(
+          "1) When control reaches 'switch' statement, value of variable is checked.\n2) Action correponding to matching case is executed and control jumps out of switch case control.\n3) If matching case is not found 'default' action isexecuted.\n4) 'default' and 'break' is optional. If 'break' keyword is not used, actions corresponding to matching case are executed.",
+        ),
+      ],
+    ),
   ]),
   Theory(id: 'i7', title: 'Loop Control Structure', subIndex: [
     "'for' Loop",
