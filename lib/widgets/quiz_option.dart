@@ -33,6 +33,7 @@ class QuizOption extends StatelessWidget {
                         fontSize: 17,
                         fontWeight: FontWeight.bold)),
               ),
+              
               isClicked
                   ? Icon(Icons.radio_button_checked_rounded, size: 15)
                   : Icon(Icons.radio_button_unchecked_outlined, size: 15),

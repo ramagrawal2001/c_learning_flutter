@@ -76,6 +76,30 @@ Widget getList(List<String> l) {
   );
 }
 
+Widget getNotebook(String text) =>ResponsiveNotebookBackground(
+  options:const ResponsiveNotebookBackgroundOptions(
+    blankLines: 2,
+    horizontalPadding: 20,
+    lineWidth: 2.5,
+    backgroundColor: Colors.black12,
+    lineColor: Colors.blueAccent,
+    lineType: LineType.line,
+    styleForHeightCalculation: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: Colors.brown,
+    ),
+  ),
+  child:Text(
+    text,
+    style:const TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      color: Colors.brown,
+    ),
+  ),
+);
+
 final THEORY_DATA = [
   Theory(
     id: 'i1',
