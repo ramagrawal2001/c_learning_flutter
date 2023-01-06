@@ -1,6 +1,10 @@
-import 'package:c_sikho/data.dart';
+import 'package:c_sikho/content/theory_data.dart';
 import 'package:c_sikho/widgets/quiz_option.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/theory.dart';
+import '../providers/theoryContent.dart';
 
 class QuizScreen extends StatefulWidget {
   static const routeName = '/quiz-screen';
@@ -46,8 +50,13 @@ class _QuizScreenState extends State<QuizScreen> {
           isCorrect = false;
           _questionIndex++;
           for (int i = 0; i < 4; i++) clicked[i] = false;
+          // if (_questionIndex == _questions.length) {
+          //   if (_totalScore >= (3 / 4) * _questions.length) {
+          //     theory.isQuizDone = true;
+          //     theory.score = _totalScore;
+          //   }
+          // }
         } else {
-          isValidateClicked = true;
           message = "";
           buttonText = "Next";
           if (_questions[_questionIndex]['answers'][x]['score']) {
@@ -56,6 +65,7 @@ class _QuizScreenState extends State<QuizScreen> {
           } else {
             isCorrect = false;
           }
+          isValidateClicked = true;
         }
       }
     });
@@ -63,6 +73,7 @@ class _QuizScreenState extends State<QuizScreen> {
 
   String indexId;
   String indexTitle;
+  Theory theory;
 
   var loadInitialData = false;
   @override
@@ -72,9 +83,9 @@ class _QuizScreenState extends State<QuizScreen> {
           ModalRoute.of(context).settings.arguments as Map<String, String>;
       indexId = routeArgs['id'];
       indexTitle = routeArgs['title'];
-      _questions = THEORY_DATA.firstWhere((iid) {
-        return iid.id == indexId;
-      }).quiz;
+      theory =
+          Provider.of<TheoryContent>(context,listen: false).findById(indexId);
+      _questions = theory.quiz;
       loadInitialData = true;
     }
 
@@ -86,7 +97,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
           title: Text(
-            "Quiz",
+            indexTitle,
           ),
           backgroundColor: Color(0xff645CAA)),
       body: _questionIndex < _questions.length
@@ -138,7 +149,10 @@ class _QuizScreenState extends State<QuizScreen> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    "Your score is: "+ _totalScore.toString()+" out of "+_questions.length.toString(),
+                    "Your score is: " +
+                        _totalScore.toString() +
+                        " out of " +
+                        _questions.length.toString(),
                     style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
@@ -158,17 +172,3 @@ class _QuizScreenState extends State<QuizScreen> {
     );
   }
 }
-
-
-// Container(
-//                     width: double.infinity,
-//                     child: ElevatedButton(
-//                       style: ButtonStyle(
-//                         backgroundColor: MaterialStateProperty.all(Colors.blue),
-//                         foregroundColor:
-//                             MaterialStateProperty.all(Colors.white),
-//                       ),
-//                       onPressed: () => _answerQuestion(answer['score']),
-//                       child: Text(answer['text']),
-//                     ),
-//                   )

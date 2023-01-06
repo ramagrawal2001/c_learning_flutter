@@ -1,19 +1,18 @@
+import 'package:c_sikho/providers/theory.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../screens/c_sub_index_screen.dart';
 
 class CIndexItem extends StatelessWidget {
-  final String id;
-  final String title;
-
-  CIndexItem(@required this.id, @required this.title);
-
+  
   @override
   Widget build(BuildContext context) {
+    Theory theory = Provider.of<Theory>(context);
     return InkWell(
       onTap: () {
         Navigator.of(context).pushNamed(
           CSubIndexScreen.routeName,
-          arguments: {'id': id, 'title': title},
+          arguments: theory.id,
         );
       },
       splashColor: Theme.of(context).primaryColor,
@@ -22,7 +21,7 @@ class CIndexItem extends StatelessWidget {
         padding: const EdgeInsets.all(15),
         alignment: Alignment.center,
         child: Text(
-          title,
+          theory.isQuizDone?theory.score.toString():theory.title,
           style: Theme.of(context).textTheme.titleSmall,
           textAlign: TextAlign.center,
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_notebook_background/responsive_notebook_background.dart';
-import 'model/theory.dart';
+import '../providers/theory.dart';
 
 const subHeadingStyle = TextStyle(
     color: Color(0xff645CAA), fontSize: 18, fontWeight: FontWeight.bold);
