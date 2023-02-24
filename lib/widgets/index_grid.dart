@@ -8,7 +8,7 @@ class IndexGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theoryContent = Provider.of<TheoryContent>(context,listen: false);
+    final theoryContent = Provider.of<TheoryContent>(context);
     final theoryItem = theoryContent.items;
     return Container(
       color: Color(0xffEBC7E8),

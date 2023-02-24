@@ -27,7 +27,7 @@ class ProgramSubIndexScreen extends StatelessWidget {
                       .pushNamed(ProgramTheoryScreen.routeName, arguments: {
                     'programId': programId,
                     'index': i.toString(),
-                    'title': subList[i]
+                    'title': subList[i],
                   })),
               child: Card(
                 margin: EdgeInsets.all(10),

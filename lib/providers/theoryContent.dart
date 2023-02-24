@@ -10,8 +10,13 @@ class TheoryContent with ChangeNotifier {
     return [..._items];
   }
 
-  Theory findById(String id){
-    return _items.firstWhere((t) => id == t.id);
+  void updateQuizStatus(String id, int score) {
+    _items.firstWhere((element) => element.id == id).isQuizDone = true;
+    _items.firstWhere((element) => element.id == id).score = score;
+    notifyListeners();
   }
 
+  Theory findById(String id) {
+    return _items.firstWhere((t) => id == t.id);
+  }
 }

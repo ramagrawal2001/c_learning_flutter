@@ -50,12 +50,16 @@ class _QuizScreenState extends State<QuizScreen> {
           isCorrect = false;
           _questionIndex++;
           for (int i = 0; i < 4; i++) clicked[i] = false;
-          // if (_questionIndex == _questions.length) {
-          //   if (_totalScore >= (3 / 4) * _questions.length) {
-          //     theory.isQuizDone = true;
-          //     theory.score = _totalScore;
-          //   }
-          // }
+          if (_questionIndex == _questions.length) {
+            if (_totalScore >= (3 / 4) * _questions.length) {
+              // theory.isQuizDone = true;
+              // theory.score = _totalScore;
+              print(_questions.length);
+              print(_totalScore);
+              Provider.of<TheoryContent>(context, listen: false)
+                  .updateQuizStatus(theory.id, _totalScore);
+            }
+          }
         } else {
           message = "";
           buttonText = "Next";
@@ -84,7 +88,7 @@ class _QuizScreenState extends State<QuizScreen> {
       indexId = routeArgs['id'];
       indexTitle = routeArgs['title'];
       theory =
-          Provider.of<TheoryContent>(context,listen: false).findById(indexId);
+          Provider.of<TheoryContent>(context, listen: false).findById(indexId);
       _questions = theory.quiz;
       loadInitialData = true;
     }
@@ -141,32 +145,63 @@ class _QuizScreenState extends State<QuizScreen> {
               ],
             )
           : Center(
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    "Congratulations on completing quiz! 🎉✨",
-                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    "Your score is: " +
-                        _totalScore.toString() +
-                        " out of " +
-                        _questions.length.toString(),
-                    style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
-                  ),
-                  TextButton(
-                    child: Text(
-                      'Restart Quiz!',
+              child: Padding(
+                padding: const EdgeInsets.all(6.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Congratulations on completing quiz! 🎉✨",
+                      style:
+                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                    onPressed: _resetQuiz,
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue),
-                      foregroundColor: MaterialStateProperty.all(Colors.white),
+                    Text(
+                      "Your score is: " +
+                          _totalScore.toString() +
+                          " out of " +
+                          _questions.length.toString(),
+                      style:
+                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text('Restart Quiz!'),
+                      ),
+                      style: TextButton.styleFrom(
+                        shadowColor: Colors.red,
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        elevation: 5,
+                      ),
+                      onPressed: _resetQuiz,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextButton(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text('Index Page'),
+                      ),
+                      style: TextButton.styleFrom(
+                        shadowColor: Colors.red,
+                        backgroundColor: Colors.blue,
+                        foregroundColor: Colors.white,
+                        elevation: 5,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context)
+                            .popUntil((route) => route.isFirst);
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
     );

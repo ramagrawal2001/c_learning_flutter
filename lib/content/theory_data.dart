@@ -594,7 +594,8 @@ final THEORY_DATA = [
     "Relational",
     "Logical",
     "Assignment",
-    "Increment/ Decrement"
+    "Increment/ Decrement",
+    "Conditional"
   ], theoryContent: [
     Column(
       children: [
@@ -917,7 +918,6 @@ final THEORY_DATA = [
     "'if' Control Structure",
     "'if-else' Control Structure",
     "'switch-case' Control Structure",
-    "Conditional Operator",
   ], theoryContent: [
     Column(
       children: [
@@ -927,7 +927,7 @@ final THEORY_DATA = [
         getSubHeading(
           "Syntax:-",
         ),
-        getNotebook(
+        getContent(
           "if(condition)\n{\n   ------\n   ------\n}",
         ),
         getContent(
@@ -943,14 +943,11 @@ final THEORY_DATA = [
         getSubHeading(
           "Syntax:-",
         ),
-        getNotebook(
+        getContent(
           "if(condition)\n{\n   --------\n   //Action A\n   --------\n}\n else\n{\n   --------\n   //Action B\n   --------\n}",
         ),
         getContent(
           "1) When control reaches 'if' statement, condition is evaluated.\n 2) If condition is true, set of instructions inside 'if' block is executed (Action A is executed).\n 3) If condition is false, set of instructions inside 'else' block is executed (Action B is executed).",
-        ),
-        Divider(
-          color: Color.fromARGB(255, 86, 41, 145),
         ),
         getHeading(
           "Nesting of'if-else'",
@@ -958,27 +955,8 @@ final THEORY_DATA = [
         getSubHeading(
           "Syntax:-",
         ),
-        getNotebook(
-          "if(condition_A){\n     if(condition_B){\n         --------\n         //Action A\n         --------\n     }\n     else{\n       --------\n       //Action B\n       --------\n       }\n}\nelse{\n     --------\n      //Action C\n      --------\n}",
-        ),
         getContent(
-          "1) When control reaches 'if' statement, condition is evaluated.\n2) If condition_A is true, set of instructions inside 'if' block is executed and then condition_B is evaluated.\n3) If condition_B is true Action A is executed. If condition_B is false Action B is executed.\n4) If condition_A is false 'else' block is executed i.e.Action C is executed.",
-        ),
-        Divider(
-          color: Color.fromARGB(255, 86, 41, 145),
-        ),
-        getHeading(
-          "'if-else' Ladder",
-        ),
-        getSubHeading(
-          "Syntax:-",
-        ),
-        getNotebook(
-          "if(condition_A){\n      --------\n      //Action A\n      --------\n}\nelse if(condition_B){\n      --------\n      //Action B\n      --------\n}\nelse if(condition_C){\n      --------\n      //Action C\n      --------\n}\nelse{\n      --------\n      //Action D\n      --------\n}",
-        ),
-        getContent(
-          "1) When control reaches 'if' statement, condition is evaluated.\n2) If condition_A is true Action A is executed andcontrol jumps out of ladder.\n3) If condition_A is false then condition_B is tested. If it is true Action B is executed and control jumps out of ladder.\n4) In this way conditions are tested if and only if all previous conditions are false. If all conditions are false 'else' block is executed i.e. Action D is executed.",
-        ),
+            "if(condition)\n{\n   --------\n   //Action A\n   --------\n}\n else\n{\n   --------\n   //Action B\n   --------\n}")
       ],
     ),
     Column(
@@ -998,38 +976,630 @@ final THEORY_DATA = [
       ],
     ),
   ]),
-  Theory(id: 'i7', title: 'Loop Control Structure', subIndex: [
-    "'for' Loop",
-    "'while' Loop",
-    "'do-while' Loop",
-    "'goto' Statement",
-    "'break' And 'continue' Keywords"
-  ]),
-  Theory(id: 'i8', title: 'Array', subIndex: [
-    "Defination, Syntax And Declaration",
-    "Initialization",
-    "Two-Dimensional Array"
-  ]),
-  Theory(id: 'i9', title: 'Function', subIndex: [
-    "Introduction",
-    "FUnction 'main()'",
-    "Components of Function",
-    "Arguments and Parameters",
-    "The 'return' Statement",
-    "Types of Function",
-    "Recursive Function"
-  ]),
+  Theory(
+    id: 'i7',
+    title: 'Loop Control Structure',
+    subIndex: [
+      "'for' Loop",
+      "'while' Loop",
+      "'do-while' Loop",
+      "'goto' Statement",
+      "'break' And 'continue' Keywords"
+    ],
+    theoryContent: [
+      Column(
+        children: [
+          getHeading(
+            "'For' Loop",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getNotebook(
+            "for(initialization ; condition ; change){\n         --------\n         //Istructions\n         --------\n}",
+          ),
+          getContent(
+            "1) When control reaches 'for' statement initialization is executed once.\n2) After initialization, condition is evaluated.\n3) If condition is true, set of instructions inside body of loop then change is executed.\n4) After change, condition is evaluated again. Steps 3,4,5 are repeated until condition turns false.\n5) When condition becomes false, control jumps out of the loop.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "'While' Loop",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getNotebook(
+            "while(condition){\n         --------\n         //Istructions\n         --------\n}",
+          ),
+          getContent(
+            "1) When control reaches 'while' statement, condition is evaluated.\n2) If condition is true, set of instructions inside bodyof loop are executed.\n3) After execution of body of loop condition isevaluated again.\n4) Step two and three are repeated until condition becomes false.\n5) When condition becomes false, control jumps out of body of loop.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "'do-while' Loop",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getNotebook(
+            "do{\n         --------\n         //Istructions\n         --------\n}while(condition);",
+          ),
+          getContent(
+            "1) When control reaches 'do' statement, set of instructions inside body of loop are executed. After executing body of loop condition in 'while' is evaluated.\n2) If condition is true, body of loop is executed again.\n3) When condition turns false, control jumps out of body of loop.\n4) In this loop, body of loop is executed once thoughcondition is false.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "'goto' Sttement",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getContent(
+            "goto LABEL;",
+          ),
+          getContent(
+            "Keyword 'goto' is used to transfer the control of program from one statement to another statement followed by colon(:)",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Keyword 'break':",
+          ),
+          getContent(
+            "1) The 'break' keyword is used to break the loop and transfer the control outside the loop.\n2) Keyword 'break' is used in 'switch-case' to break the control. It is also used in for loop, while loop, do-while loop to stop the loop.\n3) When 'break' keyword is used in loop, control jumps out of the body of loop.",
+          ),
+          Divider(
+            color: Color(0xff645CAA),
+          ),
+          getHeading(
+            "Keyword 'Continue'",
+          ),
+          getContent(
+            "1) 'continue' keyword is used to pass the control for next repetition of loop.\n2) When 'continue' keyword is used inside loop, control jumps at the beginning of loop for next repetition",
+          ),
+        ],
+      ),
+    ],
+  ),
+  Theory(
+    id: 'i8',
+    title: 'Array',
+    subIndex: [
+      "Defination, Syntax And Declaration",
+      "Initialization",
+      "Two-Dimensional Array"
+    ],
+    theoryContent: [
+      Column(
+        children: [
+          getHeading(
+            "Array",
+          ),
+          getContent(
+            "1) Array is collection of multiple elements of same data type in a single variable name.\n2) Array is derived data type.",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getContent(
+            "<data_type> array_name [SIZE];",
+          ),
+          getContent(
+            "3) Size is number of elements.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Array Initialization",
+          ),
+          getContent(
+            "1) Array elements are stored sequentially in continuous memory block.\n2) Total memory of array is equals to memory requiredby all the elements of array.",
+          ),
+          getSubHeading(
+            "Initialization e.g. :-",
+          ),
+          getContent(
+            "int a[5]={1,2,3,6,7};",
+          ),
+          getContent(
+            "3) An individual elements of the array can be access by using subscripted notations like 'a[i]', where 'a' is array_name and 'i' is index number of the elemet.\n4) Index number of first element is zero (0), Index no.of 2nd element is 1.",
+          ),
+          Divider(
+            color: Color(0xff645CAA),
+          ),
+          getHeading(
+            "Points about Array Initialization",
+          ),
+          getContent(
+            "1) If array is not initialized then elements contains garbage value.\n2) Array can be initialized only with constants.\n3) Rules are same as declaration of variable.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Two-Dimensionnal Array",
+          ),
+          getContent(
+            "1) Two dimensional array can be defined as an array which stores data in tabular form.\n2) In Two dimensional array declaration we specify number of rows and columns.\n3) Array is derived data type.\n4) ROW is no. of rows and COLUMN is no. of columns.",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getContent(
+            "<data_type> array-name [ROW] [COLUMN];",
+          ),
+        ],
+      ),
+    ],
+  ),
+  Theory(
+    id: 'i9',
+    title: 'Function',
+    subIndex: [
+      "Introduction",
+      "FUnction 'main()'",
+      "Components of Function",
+      "Arguments and Parameters",
+      "The 'return' Statement",
+      "Types of Function",
+      "Recursive Function"
+    ],
+    theoryContent: [
+      Column(
+        children: [
+          getHeading(
+            "Function",
+          ),
+          getContent(
+            "Function is a sub program or block of code written seperately to perform specific task.",
+          ),
+          getSubHeading(
+            "Advantages of Function:",
+          ),
+          getContent(
+            "1) Functions break our program into number of smaller modules. This makes program easier to understand and debug.\n2) Function enables us to use same block of code several times at several spaces in program.\n3) This eliminates unnecessary duplications of code.\n4) It saves time and memory.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Function 'main()'",
+          ),
+          getContent(
+            "Every program must have function 'main()'\n'main()' function is important part of C program. Program would not run without 'main()' function.\nExecution of every program in 'C' always starts with function 'main()'.",
+          ),
+          getSubHeading(
+            "main()' function can be written as:",
+          ),
+          getContent(
+            "1) main()\n2) int main()\n3) void main()",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Components of function",
+          ),
+          getSubHeading(
+            "1)Function Declaration:-",
+          ),
+          getContent(
+            "Any function must be declared or define before its use",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getContent(
+            "<return-type> function-name (parameter-list);",
+          ),
+          getSubHeading(
+            "Points about Function Declaration :",
+          ),
+          getContent(
+            "1) <return-type> is data type of value to be return by function.\n2) If Function doesn't returns any value, return type should 'void'.\n3) 'function-name' is identifier given by programmer.\n4) 'parameter-list' is list of data types of values to be passed to function.",
+          ),
+          Divider(
+            color: Color(0xff645CAA),
+          ),
+          getSubHeading(
+            "2)Function Call:-",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getContent(
+            "<function-name> (actual-parameters);",
+          ),
+          getSubHeading(
+            "Actual Parameter:-",
+          ),
+          getContent(
+            "1) Actual parameters can be constant values or variable. Actual parameters are variables in which values are passed to call function and stored in formal parameters.\n2) If function doesn't take any parameters the brackets (0) are left empty.\n3) Whenever function is called, control immediately jumps to the body of function. Any function can call any other function, any number of times.",
+          ),
+          Divider(
+            color: Color(0xff645CAA),
+          ),
+          getSubHeading(
+            "Body of Function:-",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getNotebook(
+            "<return-type> function-name(formal-parameters){\n       ---------\n       ---------\n}",
+          ),
+          getContent(
+            "1) It is actual block of code which is executed when a particular function is called.\n2) Formal parameters are variabless in which values of actual parameters are collected.\n3) After executing body of called function, control returns back to calling function and continuous execution from next instructions after function call.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Arguments and Parameters",
+          ),
+          getContent(
+            "1) To pass the values to the function that values is called as arguments or parameters.\n2) The parameters or arguments are used to provide communication with the calling and called function.\n3) The actual parameters are the parameters of calling function and formal parameters are that of called function.\n4) The number and data type of actual parameters should match with that of formal parameters.\n5) Parameter are optional and present in opening and closing parenthesis.",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "'return' Statement",
+          ),
+          getContent(
+            "1) The keyword 'return' is used to return a value from called function back to the calling function.\n2) It returns values present in parenthesis (brackets).\n3) Value of any data type can be returned.\n4) Only one value can returned at a time.\n5) If function doesn't return any value then we have to define return data type as an 'void'",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getContent(
+            "return (value/variable);",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "1)Standard Library Functions",
+          ),
+          getContent(
+            "1) Functions are already declared and defined by developer of language or compiler.\n2) These functions are defined in header (.h) files.\n3) for e.g. Functions printf(), scanf(), etc.",
+          ),
+          getHeading(
+            "2) User-Defined Functions:",
+          ),
+          getContent(
+            "1) Functions are declared and defined by programmer.\n2) Available and defined in source code itself.\n3) for e.g. To calculate addition function declared should - add();",
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Recursive Function:",
+          ),
+          getContent(
+            "1) When a function is being called within a function itself then it is referred as recursion, such function is referred as recursive function.\n2) Recursion is indirect way of looping.\n3) Recursion is time consuming process which reduces speed of execution of program, so programmer should avoid recursive function as long as possible.",
+          ),
+        ],
+      ),
+    ],
+  ),
   Theory(id: 'i10', title: 'String', subIndex: [
     "String",
     "String Initialization",
     "String Input and Output",
     "String Library Function"
+  ], theoryContent: [
+    Column(
+      children: [
+        getHeading(
+          "String : ",
+        ),
+        getContent(
+          "1) A collection of characters is referred as string.\n2) String is an array of charaters.",
+        ),
+        getSubHeading(
+          "Syntax :- ",
+        ),
+        getContent(
+          "------------------------------------------",
+        ),
+        getContent(
+          "char <var-name>[SIZE];",
+        ),
+        getContent(
+          "------------------------------------------",
+        ),
+        getContent(
+          "1) Where, <var-name> is name of string chooesn by programmer\n2) SIZE is maximum number of characters to be stored in string.",
+        ),
+        getContent(
+          "NOTE : Each String is always terminated by special character '\0' i.e. null character",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "String Initialization : ",
+        ),
+        getContent(
+          "AString can be initialized as follows:",
+        ),
+        getContent(
+          "------------------------------------------",
+        ),
+        getContent(
+          "char str[30]={'H','E','L','L','O','\0'};",
+        ),
+        getContent(
+          "OR",
+        ),
+        getContent(
+          "char str[30]='HELLO';",
+        ),
+        getContent(
+          "------------------------------------------",
+        ),
+        getSubHeading(
+          "Memory Representation : ",
+        ),
+        getNotebook(
+          "          0 1 2 3 4 5-----29\nstr=  |H|E|L|L|O|/0|--|--|\n        <---30 Bytes----->\n",
+        ),
+        getContent(
+          "An Individual character of string is accessed through subscripted notation like str[i], where 'str' is a string name and 'i' is index number of character",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "1) String Input :",
+        ),
+        getContent(
+          "Thwere are two methods to read string input from user/Keyboard.",
+        ),
+        getSubHeading(
+          "1)Through function 'scanf()': \nSyntax :-",
+        ),
+        getContent(
+          "scanf(\"%s\", string-name);",
+        ),
+        getContent(
+          "Function 'scanf()' reads only one word in a string because 'space' is considered as seperator.",
+        ),
+        getSubHeading(
+          "2)Through function 'gets()': \nSyntax:-",
+        ),
+        getContent(
+          "gets(string-names);",
+        ),
+        getContent(
+          "Function 'gets()' reads multiple words including space in a string. Enter key is considered as a seperator.",
+        ),
+        Divider(
+          color: Color(0xff645CAA),
+        ),
+        getHeading(
+          "2)String Output: ",
+        ),
+        getContent(
+          "There are two methods to print string on monitor.",
+        ),
+        getSubHeading(
+          "1)Through function 'printf()':\nSyntax:-",
+        ),
+        getContent(
+          "printf(\"%s\", styring-name);",
+        ),
+        getContent(
+          "Function 'printf()' print value of string variable on monitor.",
+        ),
+        getSubHeading(
+          "2)Through function 'gets()':\nSyntax:-",
+        ),
+        getContent(
+          "puts(string-name);",
+        ),
+        getContent(
+          "Function 'puts()' print value of string variable on monitor and movies cursor on new line by default.",
+        ),
+      ],
+    ),
+    Column(children: [
+      getHeading(
+        "String Library Functions:",
+      ),
+      getContent(
+        "To use String Library functions 'string.h' header file should included in source code as follows: #include<string.h>'",
+      ),
+      getSubHeading(
+        "1) Function 'strlen()':",
+      ),
+      getContent(
+        "This function returns length of given string to integer variable.",
+      ),
+      getSubHeading(
+        "Syntax :-",
+      ),
+      getContent(
+        "<integer-variable> = strlen(string-name);",
+      ),
+      Divider(
+        color: Color(0xff645CAA),
+      ),
+      getSubHeading(
+        "2) Function 'strcpy()':",
+      ),
+      getContent(
+        "This function copies one string into another string. Second string is copied into first string.",
+      ),
+      getSubHeading(
+        "Syntax :-",
+      ),
+      getContent(
+        "strcpy(destination-string, source-string",
+      ),
+      Divider(
+        color: Color(0xff645CAA),
+      ),
+      getSubHeading(
+        "3) Function 'strcat()':",
+      ),
+      getContent(
+        "This function concatenates two strings together. Source string is concatenated with target string.",
+      ),
+      getSubHeading(
+        "Syntax :-",
+      ),
+      getContent(
+        "strcat (target-string, source-string);",
+      ),
+      Divider(
+        color: Color(0xff645CAA),
+      ),
+      getHeading(
+        "4) Function 'strcmp()':",
+      ),
+      getContent(
+        "This function compares two strings alphabetically. It Returns ASCII difference of mismatched character. If there is no mismatch it returns 0.",
+      ),
+      getSubHeading(
+        "Syntax :-",
+      ),
+      getContent(
+        "<int-variable> = strcmp(string-1, string-2);",
+      ),
+      Divider(
+        color: Color(0xff645CAA),
+      ),
+      getSubHeading(
+        "5) Function 'strrev()':",
+      ),
+      getContent(
+        "This function reverses the contents of given string. Given string is modified and it contains reverse of original data.",
+      ),
+      getSubHeading(
+        "Syntax :-",
+      ),
+      getContent("strrev (string-name);")
+    ])
   ]),
-  Theory(id: 'i11', title: 'Storage Classes', subIndex: ["Storage Classes"]),
   Theory(
-      id: 'i12',
-      title: 'Preprocessors',
-      subIndex: ["Directives", "Include Directive", "Macro Directive"]),
+    id: 'i11',
+    title: 'Storage Classes',
+    subIndex: ["Storage Classes"],
+    theoryContent: [
+      Column(
+        children: [
+          getHeading(
+            "Storage Classes: ",
+          ),
+          getContent(
+            "Storage class of a variable specifies its storage location default initial value, scope and life.",
+          ),
+          getSubHeading(
+            "There are four storage classes: ",
+          ),
+          getContent(
+            "By above table, you can understand storage classes.",
+          ),
+          getContent(
+            "'auto' is default storage class",
+          ),
+          getContent(
+            "refer Programs for more understanding...",
+          )
+        ],
+      ),
+    ],
+  ),
+  Theory(id: 'i12', title: 'Preprocessors', subIndex: [
+    "Directives",
+    "Include Directive",
+    "Macro Directive"
+  ], theoryContent: [
+    Column(
+      children: [
+        getHeading(
+          "Preprocessor's Directive :",
+        ),
+        getContent(
+          "1) At preprocessing stage, source code is modified according to the preprocessor directive in program.",
+        ),
+        getSubHeading(
+          "2) Preprocessor directive is a keyword or statement which informs compiler to make additional changes or modification in program.",
+        ),
+        getContent(
+          "3) Preprocessor directive always begins with '#' symbol (Hash). and doesn't ends with semicolon(;).",
+        ),
+        getContent(
+          "4) There are some of following preprocessors directives in 'C':",
+        ),
+        getContent(
+          "#include\n#error\n#define\n#if\n#endif\n#elif, etc",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "'#include' Directive :",
+        ),
+        getContent(
+          "1)It is file inclusion directive.\n2) It is used to include or import header files(.h) files in our program.",
+        ),
+        getSubHeading(
+          "Syntax : ",
+        ),
+        getNotebook(
+          "#include <filename>\nOR\n#include \"filename\"",
+        ),
+        getContent(
+          "e.g. #include<stdio.h>",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "'#define' or Macro Directive :",
+        ),
+        getContent(
+          "1) It is definition directive, It is used to define symbolic constant or macro.\n2) Macro is an expresion which is substituted by specific value of a program.",
+        ),
+        getSubHeading(
+          "Syntax :",
+        ),
+        getNotebook(
+          "#define NAME value\nOR\n#define #EXP (A) expansion_in_A",
+        ),
+        getContent(
+          "Above syntax creates symbolic constant NAME of macro EXP(A).\nEvery occurance of NAME or EXP(A) in program is replaced by appropriate value or expansion at preprocessor.",
+        )
+      ],
+    ),
+  ]),
   Theory(id: 'i13', title: 'Pointers', subIndex: [
     "Introduction and Declaration",
     "Accessing Values of variables",
@@ -1039,13 +1609,193 @@ final THEORY_DATA = [
     "Pointer of String",
     "Memory Allocation",
     "Pointer to Pointer"
+  ], theoryContent: [
+    Column(
+      children: [
+        getHeading(
+          "Introduction to Pointer :",
+        ),
+        getContent(
+          "Pointer is a variable which is used to store memory address of another variable.",
+        ),
+        getSubHeading(
+          "Syntax :-",
+        ),
+        getContent(
+          "<data-type> *pointer_name;",
+        ),
+        getContent(
+          "'data-type' of pointer should be same as 'data-type' of variable whose address is to be stored.\nWhen we declare a variable, computer allocates memory of appropriate size according to the data type of a variable.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Accessing value of Variable:",
+        ),
+        getSubHeading(
+          "Memory Representation: ",
+        ),
+        getNotebook(
+          "For e.g.\n       int x=10;\n       x <--variable name\n       25<--value\n       8500<--address\nAddress is random value like 8200, 8201, 8389, etc.",
+        ),
+        getSubHeading(
+          "Memory Represesnatation",
+        ),
+        getContent(
+          "We can access value of variable through variable name OR address of variable. To access data in memory indirectly through memory address, we need to use pointer.\nAddress of Operator '&' gives memory address of a variable.\nValue at operator'* gives value at address stored in pointer variable.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Applications of Pointer: ",
+        ),
+        getContent(
+          "Applications of pointer to pass the parameters are as follows:",
+        ),
+        getSubHeading(
+          "1) Call By Value:",
+        ),
+        getContent(
+          "1) Value of actual parameter is passed to called function.\n2) Value of actual parameter collected in appropriate type of variable in called function.\n3) Actual Parameters and formal parameters have different/seperate memory allocations.\n4) Change in formal parameters inside function will doesn't affects (change) on actual parameter of calling parameter.",
+        ),
+        getSubHeading(
+          "2) Call By Reference:",
+        ),
+        getContent(
+            "1) Address of actual parameter is passed to called function.\n2) Address of actual parameter is collected in appropriate type of pointer variable in called function.\n3) Formal parameter contains address of actual parameter.\n4) Change in value in memory through formal parameter affects (changes) value of actual parameter indirectly.")
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Pointer Arithmetic :",
+        ),
+        getContent(
+          "1) Pointer arithmetic is concern with arithmetic mathematical operations with pointer.\n2) Mathematical operations like +, -, *, / can be\nperformed using pointers\n3) Pointer can be incremented or decremented in multiple size of data type.\n4) Two pointers can't be added or multiplied or divided with each other.\n5) One pointer can be subtracted from another of same data type.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Array Of Pointers :",
+        ),
+        getContent(
+            "1) Pointers are useful in arrays. Array is collection of same type of same elements.\n2) After declaring array, computer allocates continuous memory blocks of appropriate size and stores base address in array name.\n3) Array is a pointer which contains address of first location of allocated memory.\n4) Subscripted notation 'a[i]' is expanded as '*(a+i)' to access the individual element of array.")
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Pointer to String: ",
+        ),
+        getContent(
+          "1) We learnt that, array is a pointer.\n2) We know that, string is array of characters. Array contains base address. i.e. String is actually a pointer of characteristics.\nfor e.g.\nchar str[30]=\"HELLO\";\n'str' contains base address = 8210 'str' is total of 30 Bytes.",
+        ),
+        getContent(
+          "Character  H    E    L    L    O    /0",
+        ),
+        getContent(
+          "Address   9001 9002 9003 9004 9005 9006",
+        ),
+        getContent(
+          "Memory Allocation\n1) When we pass string to a function, base address is actually pased to called function. 2) Formal parameter is also a pointer which contains\nbase address of string. 3) If we change any element in function it will indirectly affect original string.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Memory Allocation:",
+        ),
+        getSubHeading(
+          "There are two types of Memory Allocation:",
+        ),
+        getContent(
+          "\n1) Compile-time/Static Memory Allocation:\n1) Memory is allocated during compilation of program. For each execution size of memory is fixed.\n2) Array declaration is example of static/memory time memory allocation.\n3) If size of array is greater than actual requirement then it is wastage of memory and if size of array is less than actual requirement then it is loss of data.\n4) To overcome this problem runtime memory allocation is used.\n2) Runtime/Dynamic Memory Allocation:\n1) Memory is allocated during execution of program.\n2) For each execution, size of memory may different.\n3) Memory is allocated according to user's requirement.\nFollowing functions are used for dynamic memory allocation:\n1) 'malloc()': Used to allocate memory block at run time.",
+        ),
+        getContent(
+          "Syntax :-\np=(data_type) malloc (n* sizeof(data_ty\n'p' is pointer variable.\n'n' is number of elements. 'sizeof' operator in 'C' which give memory size of variable or data type.\n2) 'free()' Function used to release memory allocated at runtime.\nSyntax :-\nfree (p);\n'p' is appropriate pointer.",
+        ),
+      ],
+    ),
+    Column(
+      children: [
+        getHeading(
+          "Pointer to Pointer :",
+        ),
+        getContent(
+          "1) Pointer is a variable which stores address of variable.\n2) To store memory address of one pointer in another is referred as pointer to pointer.\nSyntax :-\n<data-type> **pointer_name;\n3) Array of pointer is example of pointer.",
+        ),
+      ],
+    ),
   ]),
   Theory(
-      id: 'i14',
-      title: 'Structure and Union',
-      subIndex: ["Structure", "Union"]),
+    id: 'i14',
+    title: 'Structure and Union',
+    subIndex: ["Structure", "Union"],
+    theoryContent: [
+      Column(
+        children: [
+          getHeading(
+            "Structure",
+          ),
+          getContent(
+            "1) Structure is an user-defined data type. Structure is collection of different data type of element.\n2) Structure is used to create a variable which can store multiple values of different data types.",
+          ),
+          getList(
+            [
+              " DECLARATION OF STRUCTURE",
+              " MEMORY ALLOCATION AND ACCESS",
+              " ARRAY OF STRUCTURE",
+              " STRUCTURE WITH POINTER",
+            ],
+          ),
+        ],
+      ),
+      Column(
+        children: [
+          getHeading(
+            "Union",
+          ),
+          getContent(
+            "Union, like structure contain members, whose individual data types may vary. This is a major distinction between them in terms of storage. In structures each member has its own storage location, where all the members of a union use the same location.",
+          ),
+          getSubHeading(
+            "Syntax:-",
+          ),
+          getNotebook(
+            "union <tag-name>{\n      <data_type> member-1;\n      <data_type> member-2;\n      .\n      .\n      \n      <data_type> member-n;\n} variable_name;",
+          ),
+        ],
+      ),
+    ],
+  ),
   Theory(
-      id: 'i15',
-      title: 'Command Line Arguments',
-      subIndex: ["Command Line Arguments"])
+    id: 'i15',
+    title: 'Command Line Arguments',
+    subIndex: ["Command Line Arguments"],
+    theoryContent: [
+      Column(
+        children: [
+          getHeading(
+            "Command Line Arguments",
+          ),
+          getContent(
+            "1) Command line argument is a programming through DOS prompt or DOS Shell i.e. command prompt of PC.\n2) To execute commands, Start Command prompt in PC and run built executables through command.\n3) You can learn more through programs.",
+          ),
+          getSubHeading(
+            "Steps To Start command prompt (Microsoft Windows):",
+          ),
+          getContent(
+            "1) Expand Start Bar, Write 'Run' in search and open.\n2) Type 'cmd' and press 'OK', Command prompt windows will start.\n3) Type command to execute in text field of command prompt.",
+          ),
+        ],
+      ),
+    ],
+  ),
 ];
