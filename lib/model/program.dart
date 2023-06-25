@@ -7,9 +7,9 @@ class Program{
   final List<Widget> programContent;
 
   Program({
-    @required this.id,
-    @required this.title,
-    @required this.subIndex,
-    this.programContent
+    required this.id,
+    required this.title,
+    required this.subIndex,
+    required this.programContent
   });
 }

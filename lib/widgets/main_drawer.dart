@@ -1,10 +1,13 @@
+import 'package:c_sikho/providers/auth.dart';
+import 'package:c_sikho/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../screens/c_index_screen.dart';
 import '../screens/programme_index_screen.dart';
 import '../screens/about_us_screen.dart';
 
 class MainDrawer extends StatelessWidget {
-  Widget buildListTile(String title, IconData icon, Function tapHandler) {
+  Widget buildListTile(String title, IconData icon, VoidCallback tapHandler) {
     return ListTile(
       leading: Icon(
         icon,
@@ -66,6 +69,14 @@ class MainDrawer extends StatelessWidget {
             () {
               Navigator.of(context)
                   .pushReplacementNamed(AboutUsScreen.routeName);
+            },
+          ),
+          buildListTile(
+            'Logout',
+            Icons.exit_to_app,
+            () {
+              Provider.of<Auth>(context, listen: false).logout();
+              Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
             },
           ),
         ],

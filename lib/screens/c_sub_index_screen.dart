@@ -1,8 +1,6 @@
 import 'package:c_sikho/providers/theoryContent.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../content/theory_data.dart';
-import '../providers/theory.dart';
 import './index_theory_screen.dart';
 import './quiz_screen.dart';
 
@@ -11,7 +9,7 @@ class CSubIndexScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theoryId = ModalRoute.of(context).settings.arguments as String;
+    final theoryId = ModalRoute.of(context)?.settings.arguments as String;
     final theory = Provider.of<TheoryContent>(context,listen: false).findById(theoryId);
     final subIndexData = theory.subIndex;
     return Scaffold(

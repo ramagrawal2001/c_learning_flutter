@@ -20,7 +20,7 @@ class AboutUsScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "This app was made as a final year project to improve learning experience of students to learn c programming language.",
+              "We are a dedicated team of developers who have developed an Android application as our final year project. Our goal was to create an interactive and user-friendly platform to enhance the learning experience of students in the C programming language.",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             SizedBox(

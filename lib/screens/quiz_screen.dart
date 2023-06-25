@@ -1,4 +1,4 @@
-import 'package:c_sikho/content/theory_data.dart';
+import 'package:c_sikho/screens/auth_screen.dart';
 import 'package:c_sikho/widgets/quiz_option.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +22,7 @@ class _QuizScreenState extends State<QuizScreen> {
   String message = "";
   bool isCorrect = false;
   bool isValidateClicked = false;
+  bool _isLoading = false;
 
   void _resetQuiz() {
     setState(() {
@@ -52,12 +53,43 @@ class _QuizScreenState extends State<QuizScreen> {
           for (int i = 0; i < 4; i++) clicked[i] = false;
           if (_questionIndex == _questions.length) {
             if (_totalScore >= (3 / 4) * _questions.length) {
-              // theory.isQuizDone = true;
-              // theory.score = _totalScore;
+              setState(() {
+                _isLoading = true;
+              });
               print(_questions.length);
               print(_totalScore);
               Provider.of<TheoryContent>(context, listen: false)
-                  .updateQuizStatus(theory.id, _totalScore);
+                  .updateQuizStatus(theory.id, _totalScore)
+                  .catchError((error) {
+                return showDialog(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: Text('An error occurred!'),
+                    content: Text('Something went wrong.'),
+                    actions: [
+                      TextButton(
+                        child: Text('Okey'),
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                          setState(() {
+                            _isLoading = false;
+                          });
+                          Navigator.of(ctx).pop();
+                          Navigator.of(context)
+                              .popUntil((route) => route.isFirst);
+
+                          Navigator.of(context)
+                              .pushReplacementNamed(AuthScreen.routeName);
+                        },
+                      )
+                    ],
+                  ),
+                );
+              }).then((_) {
+                setState(() {
+                  _isLoading = false;
+                });
+              });
             }
           }
         } else {
@@ -75,18 +107,19 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
-  String indexId;
-  String indexTitle;
-  Theory theory;
+  late String indexId;
+  late String indexTitle;
+  late Theory theory;
 
   var loadInitialData = false;
+
   @override
   void didChangeDependencies() {
     if (!loadInitialData) {
       final routeArgs =
-          ModalRoute.of(context).settings.arguments as Map<String, String>;
-      indexId = routeArgs['id'];
-      indexTitle = routeArgs['title'];
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      indexId = routeArgs['id']!;
+      indexTitle = routeArgs['title']!;
       theory =
           Provider.of<TheoryContent>(context, listen: false).findById(indexId);
       _questions = theory.quiz;
@@ -104,106 +137,113 @@ class _QuizScreenState extends State<QuizScreen> {
             indexTitle,
           ),
           backgroundColor: Color(0xff645CAA)),
-      body: _questionIndex < _questions.length
-          ? Column(
-              children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      Container(
-                        width: double.infinity,
-                        margin: EdgeInsets.all(10),
-                        child: Text(
-                          _questions[_questionIndex]['questionText'],
-                          style: TextStyle(fontSize: 28),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      for (var i = 0; i < 4; i++)
-                        QuizOption(
-                            _questions[_questionIndex]['answers'][i]['text'],
-                            () => _answerQuestion(i),
-                            clicked[i],
-                            isValidateClicked,
-                            isCorrect),
-                    ],
-                  ),
-                ),
-                Text(
-                  message,
-                  style: TextStyle(color: Colors.red),
-                ),
-                Container(
-                  margin: EdgeInsets.all(20),
-                  child: ElevatedButton(
-                      onPressed: (() => _answerCheck()),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(buttonText),
-                      )),
-                ),
-              ],
+      body: _isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
             )
-          : Center(
-              child: Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+          : _questionIndex < _questions.length
+              ? Column(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            margin: EdgeInsets.all(10),
+                            child: Text(
+                              _questions[_questionIndex]['questionText'],
+                              style: TextStyle(fontSize: 28),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          for (var i = 0; i < 4; i++)
+                            QuizOption(
+                                _questions[_questionIndex]['answers'][i]
+                                    ['text'],
+                                () => _answerQuestion(i),
+                                clicked[i],
+                                isValidateClicked,
+                                isCorrect),
+                        ],
+                      ),
+                    ),
                     Text(
-                      "Congratulations on completing quiz! 🎉✨",
-                      style:
-                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                      message,
+                      style: TextStyle(color: Colors.red),
                     ),
-                    Text(
-                      "Your score is: " +
-                          _totalScore.toString() +
-                          " out of " +
-                          _questions.length.toString(),
-                      style:
-                          TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text('Restart Quiz!'),
-                      ),
-                      style: TextButton.styleFrom(
-                        shadowColor: Colors.red,
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        elevation: 5,
-                      ),
-                      onPressed: _resetQuiz,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    TextButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Text('Index Page'),
-                      ),
-                      style: TextButton.styleFrom(
-                        shadowColor: Colors.red,
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
-                        elevation: 5,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .popUntil((route) => route.isFirst);
-                      },
+                    Container(
+                      margin: EdgeInsets.all(20),
+                      child: ElevatedButton(
+                          onPressed: (() => _answerCheck()),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(buttonText),
+                          )),
                     ),
                   ],
+                )
+              : Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          ((_totalScore / _questions.length) < 0.75)
+                              ? "Please try again!\n"
+                              : "Congratulations on completing quiz! 🎉✨",
+                          style: TextStyle(
+                              fontSize: 36, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          "Your score is: " +
+                              _totalScore.toString() +
+                              " out of " +
+                              _questions.length.toString(),
+                          style: TextStyle(
+                              fontSize: 36, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Restart Quiz!'),
+                          ),
+                          style: TextButton.styleFrom(
+                            shadowColor: Colors.red,
+                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            elevation: 5,
+                          ),
+                          onPressed: _resetQuiz,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                          child: Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text('Index Page'),
+                          ),
+                          style: TextButton.styleFrom(
+                            shadowColor: Colors.red,
+                            backgroundColor: Colors.blue,
+                            foregroundColor: Colors.white,
+                            elevation: 5,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .popUntil((route) => route.isFirst);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
-            ),
     );
   }
 }

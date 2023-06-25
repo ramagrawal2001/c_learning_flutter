@@ -1,11 +1,10 @@
 import 'dart:developer';
 
-import 'package:c_sikho/screens/c_index_screen.dart';
+import 'package:c_sikho/screens/auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_slider/intro_slider.dart';
 
 class IntroSliderScreen extends StatefulWidget {
-  const IntroSliderScreen({Key key}) : super(key: key);
 
   @override
   State<IntroSliderScreen> createState() => _IntroSliderState();
@@ -127,7 +126,7 @@ class _IntroSliderState extends State<IntroSliderScreen> {
   }
 
   void onDonePress() {
-    Navigator.of(context).pushReplacementNamed(CIndexScreen.routeName);
+    Navigator.of(context).pushReplacementNamed(AuthScreen.routeName);
   }
 
   void onNextPress() {

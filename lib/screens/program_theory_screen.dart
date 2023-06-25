@@ -10,19 +10,19 @@ class ProgramTheoryScreen extends StatefulWidget {
 }
 
 class _ProgramTheoryScreenState extends State<ProgramTheoryScreen> {
-  String programId;
-  int index;
-  String programTitle;
-  Widget dataColumn;
+  late String programId;
+  late int index;
+  late String programTitle;
+  late Widget dataColumn;
   var loadInitialData = false;
   @override
   void didChangeDependencies() {
     if (!loadInitialData) {
       final routeArgs =
-          ModalRoute.of(context).settings.arguments as Map<String, String>;
-      programId = routeArgs['programId'];
-      index = int.parse(routeArgs['index']);
-      programTitle = routeArgs['title'];
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      programId = routeArgs['programId']!;
+      index = int.parse(routeArgs['index']!);
+      programTitle = routeArgs['title']!;
 
       dataColumn = PROGRAM_DATA.firstWhere((iid) {
         return iid.id == programId;

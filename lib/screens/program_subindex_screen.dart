@@ -1,14 +1,13 @@
 import 'package:c_sikho/screens/program_theory_screen.dart';
 import 'package:flutter/material.dart';
 import '../content/program_data.dart';
-import '../widgets/main_drawer.dart';
 
 class ProgramSubIndexScreen extends StatelessWidget {
   static const routeName = '/program-subindex-screen';
 
   @override
   Widget build(BuildContext context) {
-    final index = ModalRoute.of(context).settings.arguments as int;
+    final index = ModalRoute.of(context)?.settings.arguments as int;
     final subList = PROGRAM_DATA[index].subIndex;
     final subIndexTitle = PROGRAM_DATA[index].title;
     final programId = PROGRAM_DATA[index].id;

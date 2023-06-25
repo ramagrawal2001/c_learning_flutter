@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../screens/c_sub_index_screen.dart';
 
 class CIndexItem extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     Theory theory = Provider.of<Theory>(context);
@@ -70,7 +71,7 @@ class CIndexItem extends StatelessWidget {
                   ? const Icon(
                       Icons.check_circle_rounded,
                       size: 14,
-                      color: const Color(0xff645CAA),
+                      color: Color(0xff645CAA),
                     )
                   : const Icon(
                       Icons.radio_button_unchecked_rounded,
